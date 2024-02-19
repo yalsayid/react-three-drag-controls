@@ -4,17 +4,30 @@ A powerful and versatile React Three Fiber component that allows you to effortle
 
 ## 🚀 Installation
 
-Instead of installing via npm, please copy the `DragControls` component code directly from the `src` folder in this repository to your project.
+You have two options for using the `DragControls` component:
+
+- **Install from pmndrs/drei:**
+
+  ```bash
+  npm install @react-three/drei
+  ```
+
+  After installation, you can import it as shown in the Usage section below. Note that the `DragControls` component was merged into pmndrs/drei, as detailed in [this PR](https://github.com/pmndrs/drei/pull/1827).
+
+- **Copy from this repository:**
+  If you prefer, directly copy the `DragControls` component code from the `src` folder of this repository into your project.
 
 ## 💫 Usage
 
-1. Import the `DragControls` component:
+**If you installed from pmndrs/drei:**
 
-   ```javascript
-   import { DragControls } from "./components/DragControls";
-   ```
+```javascript
+import { DragControls } from "@react-three/drei";
+```
 
-2. Wrap your desired object with `DragControls`:
+**Regardless of installation method:**
+
+1. Wrap your desired object with `DragControls`:
 
    ```javascript
    <DragControls autoTransform={true}>
@@ -46,7 +59,7 @@ Instead of installing via npm, please copy the `DragControls` component code dir
 ## 🕹️ Example
 
 ```javascript
-import { DragControls } from "react-three-dragcontrols";
+import { DragControls } from "./components/DragControls";
 import { useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 
