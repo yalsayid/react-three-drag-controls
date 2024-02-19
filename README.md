@@ -2,6 +2,8 @@
 
 A powerful and versatile React Three Fiber component that allows you to effortlessly add dragging interactions to any object within your 3D scene.
 
+[![Edit yalsayid/react-three-object-drag-controls/main](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/yalsayid/react-three-object-drag-controls/main?embed=1)
+
 ## 🚀 Installation
 
 You have two options for using the `DragControls` component:
