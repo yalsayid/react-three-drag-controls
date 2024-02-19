@@ -1,5 +1,3 @@
-@import url("https://rsms.me/inter/inter.css");
-
 * {
   box-sizing: border-box;
 }
@@ -14,17 +12,5 @@ body,
 }
 
 body {
-  background: #004e4e;
-  font-variant-numeric: tabular-nums;
-  font-family: "Inter var", sans-serif;
-  letter-spacing: -0.025em;
-}
-
-.label {
-  display: none;
-  background: #151520;
-  color: white;
-  padding: 6px 8px;
-  border-radius: 7px;
-  white-space: nowrap;
+  background: #303035;
 }
