@@ -26,7 +26,7 @@ export type DragControlsProps = {
   dragLimits?: [
     [number, number] | undefined,
     [number, number] | undefined,
-    [number, number] | undefined
+    [number, number] | undefined,
   ];
   /** Hover event */
   onHover?: (hovering: boolean) => void;
@@ -37,7 +37,7 @@ export type DragControlsProps = {
     localMatrix: THREE.Matrix4,
     deltaLocalMatrix: THREE.Matrix4,
     worldMatrix: THREE.Matrix4,
-    deltaWorldMatrix: THREE.Matrix4
+    deltaWorldMatrix: THREE.Matrix4,
   ) => void /** Drag end event */;
   onDragEnd?: () => void;
   children: React.ReactNode;
@@ -58,11 +58,11 @@ export const DragControls: ForwardRefComponent<DragControlsProps, THREE.Group> =
         children,
         ...props
       },
-      fRef
+      fRef,
     ) => {
       // @ts-expect-error new in @react-three/fiber@7.0.5
       const defaultControls = useThree(
-        (state) => state.controls
+        (state) => state.controls,
       ) as ControlsProto;
       const { camera, size, raycaster, invalidate } = useThree();
       const ref = React.useRef<THREE.Group>(null!);
@@ -72,13 +72,12 @@ export const DragControls: ForwardRefComponent<DragControlsProps, THREE.Group> =
           onHover: ({ hovering }) => onHover && onHover(hovering ?? false),
           onDragStart: ({ event }) => {
             defaultControls.enabled = false;
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const { point } = event as any;
 
             ref.current.matrix.decompose(
               initialModelPosition,
               new THREE.Quaternion(),
-              new THREE.Vector3()
+              new THREE.Vector3(),
             );
             mousePosition3D.copy(point);
             dragOffset.copy(mousePosition3D).sub(initialModelPosition);
@@ -113,7 +112,7 @@ export const DragControls: ForwardRefComponent<DragControlsProps, THREE.Group> =
 
             dragPlane.setFromNormalAndCoplanarPoint(
               dragPlaneNormal,
-              mousePosition3D
+              mousePosition3D,
             );
             raycaster.ray.intersectPlane(dragPlane, mousePosition3D);
 
@@ -123,26 +122,26 @@ export const DragControls: ForwardRefComponent<DragControlsProps, THREE.Group> =
             const intendedNewPosition = new THREE.Vector3(
               mousePosition3D.x - dragOffset.x,
               mousePosition3D.y - dragOffset.y,
-              mousePosition3D.z - dragOffset.z
+              mousePosition3D.z - dragOffset.z,
             );
 
             if (dragLimits) {
               intendedNewPosition.x = dragLimits[0]
                 ? Math.max(
                     Math.min(intendedNewPosition.x, dragLimits[0][1]),
-                    dragLimits[0][0]
+                    dragLimits[0][0],
                   )
                 : intendedNewPosition.x;
               intendedNewPosition.y = dragLimits[1]
                 ? Math.max(
                     Math.min(intendedNewPosition.y, dragLimits[1][1]),
-                    dragLimits[1][0]
+                    dragLimits[1][0],
                   )
                 : intendedNewPosition.y;
               intendedNewPosition.z = dragLimits[2]
                 ? Math.max(
                     Math.min(intendedNewPosition.z, dragLimits[2][1]),
-                    dragLimits[2][0]
+                    dragLimits[2][0],
                   )
                 : intendedNewPosition.z;
             }
@@ -162,7 +161,7 @@ export const DragControls: ForwardRefComponent<DragControlsProps, THREE.Group> =
                   ref.current.matrix,
                   deltaLocalMatrix,
                   ref.current.matrixWorld,
-                  deltaWorldMatrix
+                  deltaWorldMatrix,
                 );
             } else {
               const tempMatrix = new THREE.Matrix4().copy(ref.current.matrix);
@@ -180,7 +179,7 @@ export const DragControls: ForwardRefComponent<DragControlsProps, THREE.Group> =
                   tempMatrix,
                   deltaLocalMatrix,
                   ref.current.matrixWorld,
-                  deltaWorldMatrix
+                  deltaWorldMatrix,
                 );
             }
             invalidate();
@@ -197,7 +196,7 @@ export const DragControls: ForwardRefComponent<DragControlsProps, THREE.Group> =
             filterTaps: true,
             threshold: 1,
           },
-        }
+        },
       );
 
       React.useImperativeHandle(fRef, () => ref.current, []);
@@ -213,7 +212,6 @@ export const DragControls: ForwardRefComponent<DragControlsProps, THREE.Group> =
       return (
         <group
           ref={ref}
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           {...(bind() as any)}
           matrix={matrix}
           matrixAutoUpdate={false}
@@ -222,5 +220,5 @@ export const DragControls: ForwardRefComponent<DragControlsProps, THREE.Group> =
           {children}
         </group>
       );
-    }
+    },
   );
